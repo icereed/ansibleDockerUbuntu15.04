@@ -31,10 +31,10 @@
 
 
 - name: Docker has settings folder
-  file: path=/etc/systemd/system/docker.service.d state=directory mode=0755
+  file: path=/etc/systemd/system/docker.service.d state=directory mode=0777 owner=ubuntu group=docker
 
 - name: Proxy config for Docker
-  template: src=http_proxy.conf dest=/etc/systemd/system/docker.service.d/http-proxy.conf
+  template: src=http_proxy.conf dest=/etc/systemd/system/docker.service.d/http-proxy.conf mode=0666 owner=ubuntu group=docker
 
 - name: Docker as service
   service: name=docker state=restarted
@@ -43,4 +43,6 @@
   get_url:
     url: https://github.com/docker/compose/releases/download/1.6.2/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
-    mode: 0755
+    mode: 0777
+    owner: ubuntu
+    group: docker
