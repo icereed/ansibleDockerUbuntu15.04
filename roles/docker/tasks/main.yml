@@ -37,7 +37,7 @@
   template: src=http_proxy.conf dest=/etc/systemd/system/docker.service.d/http-proxy.conf mode=0666 owner=ubuntu group=docker
 
 - name: Docker as service
-  service: name=docker state=restarted
+  service: name=docker state=reloaded enabled=yes
 
 - name: Download Docker-Compose
   get_url:
